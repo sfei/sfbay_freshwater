@@ -10,8 +10,8 @@
 # File-format description:  https://help.waterdata.usgs.gov/faq/about-tab-delimited-output
 # Automated-retrieval info: https://help.waterdata.usgs.gov/faq/automated-retrievals
 #
-# Contact:   gs-w_support_nwisweb@usgs.gov
-# retrieved: 2020-12-28 20:18:39 EST       (vaww02)
+# Contact:   gs-w_waterdata_support@usgs.gov
+# retrieved: 2023-06-22 17:32:17 EDT       (nadww01)
 #
 # Data for the following 1 site(s) are contained in this file
 #    USGS 11169000 GUADALUPE R A SAN JOSE CA
