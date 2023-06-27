@@ -1,0 +1,155 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.22.0-Bia?owie?a">
+  <identifier>streams_forslp</identifier>
+  <parentidentifier></parentidentifier>
+  <language>ENG</language>
+  <type>dataset</type>
+  <title>streams_forslp</title>
+  <abstract>BAARI (Bay Area Aquatic Resource Inventory) was established to meet regional needs for wetlands and stream monitoring. One primary objective was to apply standardized monitoring tools to ensure data comparability and consistent, documented quality. These data help agencies and organizations assess the extent and condition of wetlands in local watersheds and identify and prioritize opportunities for ecological restoration and enhancement in a watershed context.
+Background
+BAARI data is part of the Wetland and Riparian Area Monitoring Plan (WRAMP), which consists of a 1-2-3 level monitoring framework. This allows assessment of wetlands at two scales: landscape and highly localized. BAARI is Level 1 of this framework, developed for landscape level analyses of wetland extent, distribution and abundance. Geographic information systems (GIS) and remote sensing are used to map and create inventories of existing wetlands (both modern and historical). These inventories quantify the extent of wetland habitats and projects, and are used for landscape profiles of wetlands at the state, regional, watershed, and local scales. 
+Level 2 entails rapid field assessment of wetland health or ecological condition. In California the California Rapid Assessment Method (CRAM) is a diagnostic tool that two or more trained practitioners can use to assess the condition of a wetland or riparian site in one half day or less using visual indicators in the field. 
+Level 3 monitoring entails intensive sampling of ecological function or specific aspects of wetland condition. These assessments are intensive quantitative measurements of condition, stress, or cause-and-effect relationships. A Level 3 assessment is an in-depth study of a particular attribute of wetland health such as water quality, fish habitat, bird populations, vegetative cover and diversity, or physical processes. Level 3 monitoring can describe the performance of specific ecological functions at the site scale. 
+Information on the WRAMP is available at http://www.mywaterquality.ca.gov/eco_health/wetlands/condition/wramp_toolkit.shtml
+More information on BAARI can be found online at: http://www.sfei.org/BAARI. 
+Description of Updates in Version 2.1
+Added channels in Santa Clara County based on the Santa Clara Valley Water District's 2004 stream layer, available at http://data-valleywater.opendata.arcgis.com/datasets/e74548aaba0e46918523d62645e283fd_9 . Presence of these channels was confirmed in recent aerial imagery. Streams added include teh Permanente Diversion Channel, Upper Sunnyvale West Channel (The upper portion is also referred to as Moffett Channel, sections of teh Vasona Canal. Page Channel also reclassified from a 'Ditch' (FD) to an 'Engineered Channel (FEC)
+In the Petaluma River Watershed, another SFEI study mapped a few channels in great detail using a Lidar derived DEM. These channels were incorporated into BAARI. Also, a depressional wetland was reclassified as Unnatural (DOWU)
+Ran topology on the streams layer and corrected small errors. This included removing small segments >50m long, and correcting some overlaps and self-intersections.
+Description of Updates in Version 2
+Local experts provided advice on and reviewed BAARI?s stream, wetland and riparian GIS layers in specific locations to help update the data as conditions in the field changed and/or to increase its accuracy and detail. Improving the accuracy and detail of BAARI improves the base maps for all monitoring and assessment efforts to understand the distribution, amount and ecological condition of Bay Area aquatic resources. The following updates were made to BAARI under this project:
+The Santa Clara Valley Water District (SCVWD) provided their GIS based stream data for the Guadalupe River Watershed. SFEI?s GIS team incorporated parts of the SCVWD dataset into BAARI to improve the accuracy and detail of the BAARI stream layer with the Guadalupe River watershed. Updates included features such as underground connectors between the upper and lower watershed reaches, and enhanced details of portions of the upper watershed. 
+Watershed Sciences developed six hand-drawn maps showing field verified ditch locations circa 2006. Those data were used in developing the sediment TMDL for the watershed. Watershed sciences provided those maps to SFEI?s GIS team and worked with them to compare the remotely sensed stream and ditch locations in the BAARI data set (based on 2009 NAIP imagery) to her maps and other data (including Google Earth using multiple image dates). Based on this careful comparative process, about 500 linear updates were made to the BAARI stream layer for the Sonoma Creek watershed with the data source attributed to Laurel Collins? maps. 
+SFEI staff added stream names for the whole BAARI dataset (Bay Area 9 counties, ocean shoreline, and Tomales Bay - 530 different names applied to more than 24000 stream segments).
+Additional corrections to wetland and stream presence, extent, and classification were appended to the dataset by SFEI staff where inaccuracies were identified based on local expertise of wetlands in the Bay Area.
+All BAARI updates were reviewed by a second GIS staff member to ensure that they were acceptable and followed BAARI mapping protocols. 
+Description of Attribute Fields in BAARI
+Baylands
+RestProj: restoration project associated with this wetland. This field has not been updated in version 2. Refer to http://www.EcoAtlas.org for current listings of ecological restoration projects. 
+Source_Dat: source(s) from which the wetland polygon was digitized, or otherwise incorporated into BAARI
+WetlandTyp: Coded classification of the wetland type. Codes are defined on p5-6 of "BAARI Mapping Standards" 
+Organization: organization that digitized the wetland polygon
+ClickCode: simplification of the 'WetlandTyp' attribute used for map database queries in web mapping applications such as http://www.EcoAtlas.org. Refers to the standardized wetland classification system employed by the California Aquatic Resources Inventory (CARI). More information about CARI is available at http://www.sfei.org/it/gis/cari 
+ClickLabel: verbal description of the ClickCode code
+LegCode: further simplification of the 'WetlandTyp' attribute used in the legends of web mapping applications such as http://www.EcoAtlas.org
+LegLabel: verbal description of the LegCode code
+ORIG_FID: unused
+OpenWater: Open Water (1) or a wetland (0)
+TidRip: unused
+GlobalID: Unique identifier, if one exists 
+Streams
+WetlandTyp: Coded classification of the stream type. Codes are defined on p9-10 of "BAARI Mapping Standards" 
+Bayland: Identifies whether the feature falls within the historical extent of the Baylands (1) or not (0)
+Strahler: Strahler stream order of the stream segment.
+ClickCode: simplification of the 'WetlandTyp' attribute used for map database queries in web mapping applications such as http://www.EcoAtlas.org
+ClickLabel: verbal description of the ClickCode code
+LegCode: further simplification of the 'WetlandTyp' attribute used in the legends of web mapping applications such as http://www.EcoAtlas.org
+LegLabel: verbal description of the LegCode code
+GlobalID: Unique identifier, if one exists (e.g. ReachCode attribute in NHD)
+IDNum: Numerical version of GlobalID
+StreamName: the recognized Geographic Names Information System (GNIS) name of the stream
+Source_Dat: source(s) from which the segment was digitized, or otherwise incorporated into BAARI.
+Name_Source: source from which 'StreamName' was identified
+FNode: "From Node" used to determine stream flow direction
+TNode: "To Node" used to determine stream flow direction
+LegHeader: legend header used in the legends of web mapping applications such as http://www.EcoAtlas.org
+TMDL_DATA: "Yes" value indicates TMDL data is available for this stream segment. Contact SFEI for information about integrating TMDL data with BAARI
+Wetlands (Non-tidal)
+WetlandTyp: Coded classification of the wetland type. Codes are defined on p6-9 of "BAARI Mapping Standards" 
+SourceData: source(s) from which the wetland polygon was digitized, or otherwise incorporated into BAARI
+Organization: organization that digitized the wetland polygon
+ClickCode: simplification of the 'WetlandTyp' attribute used for map database queries in web mapping applications such as http://www.EcoAtlas.org
+ClickLabel: verbal description of the ClickCode code
+LegCode: further simplification of the 'WetlandTyp' attribute used in the legends of web mapping applications such as http://www.EcoAtlas.org
+LegLabel: verbal description of the LegCode code
+GlobalID: Unique identifier, if one exists
+
+BAARI (Bay Area Aquatic Resource Inventory) was established to meet regional needs for wetlands and stream monitoring. The objective of these data is to create standardized regional datasets and maps of surface aquatic resources for use by both environmental scientists and resource managers. The Bay Area Aquatic Resources Inventory (BAARI) is the product of this effort and supports a wide range of environmental management uses. BAARI consists of 3 feature classes: Baylands (tidal wetlands), Streams, and (non-tidal) Wetlands. BAARI data can be downloaded from http://www.sfei.org/sites/default/files/data/BAARI_v2pt1__SFEI_2017.zip. Detailed information about mapping methods and protocols can be found in "Bay Area Aquatic Resources Inventory (BAARI): Standards and Methodology for Stream Network, Wetland and Riparian Mapping" (BAARI Mapping Standards) which is included in the downloadable ZIP file, and also available at http://www.sfei.org/sites/default/files/general_content/SFEI_MAPPING_STANDARDS_08092011_v8_0.pdf. This is the Version 2.1 release of the BAARI GIS dataset, published on December 28, 2017. It improves upon and replaces the original version of BAARI released in 2011 and BAARI v2.0 released in 2015. Details of the updates are described below.</abstract>
+  <keywords vocabulary="Search keys">
+    <keyword>estuary</keyword>
+    <keyword>basemap</keyword>
+    <keyword>BAARI</keyword>
+    <keyword>CARI</keyword>
+    <keyword>SFEI</keyword>
+    <keyword>ASC</keyword>
+    <keyword>wetland</keyword>
+    <keyword>Bay</keyword>
+    <keyword>Bay Area</keyword>
+    <keyword>stream</keyword>
+    <keyword>river</keyword>
+    <keyword>creek</keyword>
+    <keyword>channel</keyword>
+    <keyword>Alameda</keyword>
+    <keyword>Contra Costa</keyword>
+    <keyword>Marin</keyword>
+    <keyword>Napa</keyword>
+    <keyword>San Francisco</keyword>
+    <keyword>San Mateo</keyword>
+    <keyword>Santa Clara</keyword>
+    <keyword>Solano</keyword>
+    <keyword>Sonoma</keyword>
+    <keyword>pond</keyword>
+    <keyword>lagoon</keyword>
+    <keyword>playa</keyword>
+    <keyword>depressional</keyword>
+    <keyword>spring</keyword>
+    <keyword>seep</keyword>
+    <keyword>slope</keyword>
+    <keyword>aquatic</keyword>
+    <keyword>resources</keyword>
+    <keyword>water</keyword>
+  </keywords>
+  <contact>
+    <contactAddress>
+      <type>both</type>
+      <address>4911 Central Ave.</address>
+      <city>Richmond</city>
+      <administrativearea>CA</administrativearea>
+      <postalcode>94804</postalcode>
+      <country>US</country>
+    </contactAddress>
+    <name>Micha Salomon</name>
+    <organization>San Francisco Estuary Institute</organization>
+    <position>GIS Specialist</position>
+    <voice>510-746-7353</voice>
+    <fax></fax>
+    <email>micha@sfei.org</email>
+    <role></role>
+  </contact>
+  <links/>
+  <fees></fees>
+  <constraints type="Limitations of use">This file is part of BAARI.
+BAARI is free data: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+BAARI is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+More information about GNU General Public License is available at http://www.gnu.org/licenses/.SFEI data are available without restriction upon use with the following caveats. Prudent usage, knowledge of the data quality, and professional courtesy should all be considered in obtaining and using SFEI data. As this dataset is NOT a survey document, neither use it as such nor use it beyond the limits of the source scale. Please read and fully comprehend all available metadata prior to data use. SFEI requests that the use of these data in any map, publication, or report should include citation of the data source(s) used and give proper attribution and credit to the originators of the data. Questions about SFEI data may be directed to the GIS Manager, at 510-746-7334.</constraints>
+  <rights>San Francisco Estuary Institute and Aquatic Science Center 2017</rights>
+  <encoding></encoding>
+  <crs>
+    <spatialrefsys>
+      <wkt>PROJCRS["NAD83 / California zone 3 (ftUS)",BASEGEOGCRS["NAD83",DATUM["North American Datum 1983",ELLIPSOID["GRS 1980",6378137,298.257222101,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4269]],CONVERSION["SPCS83 California zone 3 (US Survey feet)",METHOD["Lambert Conic Conformal (2SP)",ID["EPSG",9802]],PARAMETER["Latitude of false origin",36.5,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8821]],PARAMETER["Longitude of false origin",-120.5,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8822]],PARAMETER["Latitude of 1st standard parallel",38.4333333333333,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8823]],PARAMETER["Latitude of 2nd standard parallel",37.0666666666667,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8824]],PARAMETER["Easting at false origin",6561666.667,LENGTHUNIT["US survey foot",0.304800609601219],ID["EPSG",8826]],PARAMETER["Northing at false origin",1640416.667,LENGTHUNIT["US survey foot",0.304800609601219],ID["EPSG",8827]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["US survey foot",0.304800609601219]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["US survey foot",0.304800609601219]],USAGE[SCOPE["Engineering survey, topographic mapping."],AREA["United States (USA) - California - counties Alameda; Calaveras; Contra Costa; Madera; Marin; Mariposa; Merced; Mono; San Francisco; San Joaquin; San Mateo; Santa Clara; Santa Cruz; Stanislaus; Tuolumne."],BBOX[36.73,-123.02,38.71,-117.83]],ID["EPSG",2227]]</wkt>
+      <proj4>+proj=lcc +lat_0=36.5 +lon_0=-120.5 +lat_1=38.4333333333333 +lat_2=37.0666666666667 +x_0=2000000.0001016 +y_0=500000.0001016 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs</proj4>
+      <srsid>209</srsid>
+      <srid>2227</srid>
+      <authid>EPSG:2227</authid>
+      <description>NAD83 / California zone 3 (ftUS)</description>
+      <projectionacronym>lcc</projectionacronym>
+      <ellipsoidacronym>EPSG:7019</ellipsoidacronym>
+      <geographicflag>false</geographicflag>
+    </spatialrefsys>
+  </crs>
+  <extent>
+    <spatial crs="EPSG:2227" minx="0" dimensions="2" maxy="0" maxz="0" miny="0" minz="0" maxx="0"/>
+    <temporal>
+      <period>
+        <start>2015-06-30T07:00:00Z</start>
+        <end></end>
+      </period>
+    </temporal>
+    <temporal>
+      <period>
+        <start></start>
+        <end></end>
+      </period>
+    </temporal>
+  </extent>
+</qgis>

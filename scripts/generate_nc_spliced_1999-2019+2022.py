@@ -18,11 +18,13 @@ import stompy.model.delft.io as dio
 
 opj=os.path.join
 
-##
+## replace coyote flows?
+replace_coyote_with_usgs = False
 
 # configure paths:
 flow_dir_bahm="../ModelforNutrient/BAHM Flow"
 flow_dir_tan="../TanModel_v1_Flow"
+flow_dir_pedro = "../Flow4BayModel_08012021_10012022"
 flow_dir_usgs = "../USGS_flow"
 shp_fn_dir = "../ModelforNutrient/BAHM Flow/PourPointsforBAHydroModel"
 
@@ -53,7 +55,7 @@ def load_bahm_flow(src_fn):
     and return
     """
     df=pd.read_fwf(src_fn,
-                   [ (0,4), (5,7), (8,10),(10,23) ],
+                   colspecs=[ (0,4), (5,7), (8,10),(10,23) ],
                    skiprows=5,
                    names=['year','month','day','flow_cfs'],
                    parse_dates={'date': [0,1,2] } )
@@ -69,7 +71,7 @@ def load_tan_flow(src_fn):
     and return
     """
     df=pd.read_fwf(src_fn,
-                   [ (0,4), (5,7), (8,10),(10,23) ],
+                   colspecs=[ (0,4), (5,7), (8,10),(10,23) ],
                    skiprows=1,
                    names=['year','month','day','flow_cfs'],
                    parse_dates={'date': [0,1,2] } )
@@ -100,7 +102,7 @@ for rec in pour_points:
     ds['station']= ( ('station',), [src_name])
     ds['source'] = ( ('station',), ['BAHM (1999-2017)/Tan''s New Model (2018-2019)'])
     
-    if src_name=='COYOTE':
+    if replace_coyote_with_usgs and src_name=='COYOTE':
         # special handling
         usgs_coyote_fn=opj(flow_dir_usgs,'11172175.txt')
         df0=rdb.rdb_to_dataset(usgs_coyote_fn).to_dataframe()
@@ -109,29 +111,44 @@ for rec in pour_points:
         df_post(df)
         ds['source'] = ( ('station',), ['USGS'])
     else:
+        
         # bahm data
         src_fn_1=opj(flow_dir_bahm,"%s.txt"%src_name)
         assert os.path.exists(src_fn_1)
         print("name: %s fn: %s"%(name,src_fn_1))
         df_1=load_bahm_flow(src_fn_1)
+
         # tan's model data
         src_fn_2=opj(flow_dir_tan,"%s.txt"%src_name)
         assert os.path.exists(src_fn_2)
         print("name: %s fn: %s"%(name,src_fn_2))
         df_2=load_tan_flow(src_fn_2)
+
+        # pedro's model data
+        src_fn_3=opj(flow_dir_pedro,"%s.txt"%src_name)
+        assert os.path.exists(src_fn_3)
+        print("name: %s fn: %s"%(name,src_fn_3))
+        df_3=load_tan_flow(src_fn_3)
+
         # splice them together
-        df = df_1.append(df_2).reset_index(drop=True)
+        df = pd.concat([df_1,df_2,df_3]).reset_index(drop=True)
 
     # convert to dataset, ready for concatenation along a "station" dimension
     ds['time']= ( ('time',), df.date)
     ds['flow_cfs']=( ('station','time'), [df.flow_cfs])
     ds['flow_cms']=( ('station','time',), [df.flow_cms])
 
-    pnts=np.atleast_2d(np.array(rec['geom']))
-    pnt=pnts.mean(axis=0)
-    ds['utm_x']=pnt[0]
-    ds['utm_y']=pnt[1]
-    ll=utm2ll(pnt)
+    #pnts=np.atleast_2d(np.array(rec['geom']))
+    #pnt=pnts.mean(axis=0)
+    #ds['utm_x']=pnt[0]
+    #ds['utm_y']=pnt[1]
+    #ll=utm2ll(pnt)
+    x, y = rec['geom'].coords.xy
+    utm_x = x[0]
+    utm_y = y[0]
+    ds['utm_x'] = utm_x
+    ds['utm_y'] = utm_y
+    ll=utm2ll((utm_x,utm_y))
     ds['longitude']=( ('station',), [ll[0]])
     ds['latitude']=( ('station',), [ll[1]])
     
