@@ -70,11 +70,16 @@ def load_tan_flow(src_fn):
     pandas dataframe, add the extra fields via df_post()
     and return
     """
-    df=pd.read_fwf(src_fn,
-                   colspecs=[ (0,4), (5,7), (8,10),(10,23) ],
-                   skiprows=1,
-                   names=['year','month','day','flow_cfs'],
-                   parse_dates={'date': [0,1,2] } )
+    #df=pd.read_fwf(src_fn,
+    #               colspecs=[ (0,4), (5,7), (8,10),(10,23) ],
+    #               skiprows=1,
+    #               names=['year','month','day','flow_cfs'],
+    #               parse_dates={'date': [0,1,2] } )
+    #df_post(df)
+    
+    df = pd.read_csv(src_fn, sep='\t')
+    df.columns = ['date', 'flow_cfs']
+    df['date'] = pd.DatetimeIndex(df['date'])
     df_post(df)
 
     return df

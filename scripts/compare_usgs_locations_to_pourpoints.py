@@ -9,20 +9,10 @@ import pandas as pd
 from matplotlib.backends.backend_pdf import PdfPages
 
 ########################################################################################
-# the first step is to make some plots to help us match USGS stations with pour points
+# make some plots to help us match USGS stations with pour points
 ########################################################################################
 
-# map usgs stations to pour poitns
-usgs_to_pourpt = [[11458500 ,'SONOMA'],
-                  [11458000 , 'NAPA'],
-                  [11460000 , 'MARINS3'],
-                  [11181040 , 'USANLORZ'],
-                  [11181040 , 'EBAYCc3'],
-                  [11179000 , 'UALAMEDA'],
-                  [11164500 , 'SCLARAVW1'],
-                  [11169025 , 'SCLARAVCc'],
-                  [11169000 , 'SCLARAVCc'],
-                  [11172175 , 'COYOTE']]
+outfile = '../plots/sfbay_freshwater_usgs_locations_vs_pourpoints.pdf'
 
 # list of zoom windows for plotting figurs
 zoom_windows = [(518020.06212375907, 576204.087092947, 4185296.8007331635, 4261880.9019746585), 
@@ -86,7 +76,7 @@ pour_points = add_centroid(pour_points)
 watersheds = add_centroid(watersheds)
 
 
-with PdfPages('../plots/compare_watershed_model_to_usgs.pdf') as pdf:
+with PdfPages(outfile) as pdf:
 
 	# plot the pour points with the USGS gage station locations...
 	
@@ -133,61 +123,3 @@ with PdfPages('../plots/compare_watershed_model_to_usgs.pdf') as pdf:
 
 		plt.close('all')
 	
-	########################################################################################
-	# the next step is to compare netcdf file with usgs stations
-	########################################################################################
-	
-	
-	ds = xr.open_dataset('../outputs/sfbay_freshwater.nc')
-	
-	
-	for station_to_ppt in usgs_to_pourpt:
-	
-		station = station_to_ppt[0]
-		ppt = station_to_ppt[1]
-	
-		# make a figure
-		fig, ax = plt.subplots(figsize=(24,8.5))
-	
-		# plot pour point data first because it's farther downstream, and thus should be bigger
-		ds1 = ds.sel(station=ppt)
-		time_ppt = ds1.time.values
-		flow_ppt = ds1.flow_cms.values
-	
-		ind = time_ppt <= np.datetime64('2017-12-31')
-		ax.semilogy(time_ppt[ind], flow_ppt[ind], label='%s (BAHM)' % ppt, color='red')
-	
-		ind = np.logical_and(time_ppt >= np.datetime64('2018-01-01'),
-			                 time_ppt <= np.datetime64('2019-12-31'))
-		ax.semilogy(time_ppt[ind], flow_ppt[ind], label='%s (WDM from Tan)' % ppt, color='blue')
-	
-	
-		ind = time_ppt >= np.datetime64('2021-08-01')
-		ax.semilogy(time_ppt[ind], flow_ppt[ind], label='%s (WDM from Pedro)' % ppt, color='purple')
-	
-	
-		# then add usgs station data
-		data = pd.read_csv('../USGS_flow/%d.txt' % station, sep='\t', comment='#').iloc[1:]
-		time_usgs = data['datetime'].values.astype('datetime64[ns]')
-		for col in data.columns:
-			if '_00060_' in col and not '_cd' in col:
-				flow_col = col
-		flow_usgs = data[flow_col].values.astype(float) * 0.0283168 # convert cfs to cms
-		flow_usgs[flow_usgs<=0] = np.nan
-
-
-		ax.semilogy(time_usgs, flow_usgs, label='USGS Station %d' % station, color='gold')
-	
-		ax.legend()
-	
-		ylim = ax.get_ylim()
-	
-		ax.set_ylim([0.01, ylim[1]])
-	
-		ax.set_ylabel('Flow (m3/s)')
-	
-		pdf.savefig()
-	
-		plt.close('all')
-		
-					
