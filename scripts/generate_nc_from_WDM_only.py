@@ -23,7 +23,7 @@ opj=os.path.join
 replace_coyote_with_usgs = False
 
 # configure paths:
-flow_dir = "../Flow4BayModel_1994_2022"
+flow_dir = "../Flow4BayModel_01011994_12312023"
 flow_dir_usgs = "../USGS_flow"
 shp_fn_dir = "../ModelforNutrient/BAHM Flow/PourPointsforBAHydroModel"
 
