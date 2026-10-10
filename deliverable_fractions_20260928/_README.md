@@ -29,3 +29,7 @@ These files show flow and sediment output from the Watershed Dynamic Model.
  4. Output was derived from WDM run120	
 
 ---
+
+Note from Allie Oct 9 2026: data is from here:
+
+G:\1_CleanWater\RegionalWatershedModel\WDM_Phase3\For_NMS\FLOW_SSC\deliverable_fractions_20260928\
