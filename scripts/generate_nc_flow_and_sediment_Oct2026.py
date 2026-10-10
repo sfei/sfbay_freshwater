@@ -200,6 +200,6 @@ merged.attrs['featureType']='timeSeries'
 ##
 
 #fn='/opt/data/sfei/sfbay_freshwater.nc'
-fn="../outputs/sfbay_freshwater_flow_ssc.nc"
+fn="../outputs/sfbay_freshwater.nc"
 os.path.exists(fn) and os.unlink(fn)
 merged.to_netcdf(fn)
